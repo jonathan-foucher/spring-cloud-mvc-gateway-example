@@ -1,0 +1,22 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /gateway-example
+
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: movie-api
+            uri: ${movie-api.base-url}
+            predicates:
+              - Path=/movie-api/**
+            filters:
+              - StripPrefix=1
+              - AddRequestHeader=x-api-key, ${movie-api.api-key}
+              - RemoveRequestHeader=authorization
+
+movie-api:
+  base-url: http://localhost:8091
+  api-key: some-api-key
