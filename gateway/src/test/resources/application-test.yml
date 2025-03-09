@@ -1,0 +1,3 @@
+movie-api:
+  base-url: http://localhost:${wiremock.server.port}
+  api-key: some-api-key
